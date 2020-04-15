@@ -15,7 +15,7 @@
 
 </body>
 <h1>Edit Book</h1>
-<form:form action="/books/edit" method="post" modelAttribute="book">
+<form:form action="/books/edit/${ book.id }" method="post" modelAttribute="book">
     <p>
     	<form:errors path="title"/>
         <form:label path="title">Title</form:label>

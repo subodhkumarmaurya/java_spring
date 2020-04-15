@@ -74,11 +74,13 @@ public class JSPController {
 		bRepo.save(book);
 		return "redirect:/";
 	}
-	@PostMapping("/books/edit")
-	public String edit(@Valid @ModelAttribute("book") Book book, BindingResult result) {
+	@PostMapping("/books/edit/{id}")
+	public String edit(@PathVariable("id") Long id, @Valid @ModelAttribute("book") Book book, BindingResult result) {
 		if(result.hasErrors()) {
 			return "edit.jsp";
 		}
+		Book updateBook = bServ.findOne(id);
+		updateBook.setId(id);
 		bRepo.save(book);
 		return "redirect:/";
 	}
