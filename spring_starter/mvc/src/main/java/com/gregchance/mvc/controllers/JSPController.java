@@ -35,7 +35,8 @@ public class JSPController {
 		return "index.jsp";
 	}
 	@GetMapping("/books/new")
-	public String newBook(@ModelAttribute("book") Book book) {
+	public String newBook(Model model) {
+		model.addAttribute("book", new Book());
 		return "newbook.jsp";
 	}
 	@GetMapping("/books/{id}")
@@ -47,9 +48,9 @@ public class JSPController {
 		model.addAttribute("book", book);
 		return "book.jsp";
 	}
-	@GetMapping("/books/edit/{id}")
+	@GetMapping("/books/edit/{book_id}")
 	public String edit(
-			@PathVariable("id") Long id,
+			@PathVariable("book_id") Long id,
 			Model model
 			) {
 		Book book = bServ.findOne(id);
@@ -74,13 +75,13 @@ public class JSPController {
 		bRepo.save(book);
 		return "redirect:/";
 	}
-	@PostMapping("/books/edit/{id}")
-	public String edit(@PathVariable("id") Long id, @Valid @ModelAttribute("book") Book book, BindingResult result) {
+	@PostMapping("/books/edit/{book_id}")
+	public String edit(@PathVariable("book_id") Long id, @Valid @ModelAttribute("book") Book book, BindingResult result) {
 		if(result.hasErrors()) {
+			book.setId(id);
 			return "edit.jsp";
 		}
-		Book updateBook = bServ.findOne(id);
-		updateBook.setId(id);
+		book.setId(id);
 		bRepo.save(book);
 		return "redirect:/";
 	}
