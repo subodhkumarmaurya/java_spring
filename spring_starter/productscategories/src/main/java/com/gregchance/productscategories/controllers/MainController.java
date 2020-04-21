@@ -59,10 +59,10 @@ public class MainController {
 	public String addCat(@PathVariable("product_id") Long productID, @RequestParam("cat_id") Long catID) {
 		Product product = prepo.findById(productID).orElse(null);
 		Cat cat = crepo.findById(catID).orElse(null);
-		product.getCategories().add(cat);
-//		System.out.println(product.getCategories());
-		product.setCategories(product.getCategories());
-		prepo.save(product);
+//		product.getCategories().add(cat);
+		System.out.println(product.getCategories());
+//		product.setCategories(product.getCategories());
+//		prepo.save(product);
 		return "redirect:/";
 	}
 	

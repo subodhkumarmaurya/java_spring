@@ -5,11 +5,10 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.gregchance.events.models.User;
+import com.gregchance.events.models.Comment;
 
 @Repository
-public interface UserRepo extends CrudRepository<User, Long> {
+public interface CommentRepo extends CrudRepository<Comment, Long> {
 
-	List<User> findAll();
-	User findByEmail(String email);
+	List<Comment> findAll();
 }

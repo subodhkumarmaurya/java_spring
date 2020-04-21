@@ -1,12 +1,18 @@
 package com.gregchance.events.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -39,6 +45,19 @@ public class User {
 	@Transient
 	private String confirmPassword;
 	
+	@OneToMany(mappedBy = "host", fetch = FetchType.LAZY)
+	private List<Event> hostEvents;
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Comment> comments;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(
+			name = "users_events",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "event_id")
+			)
+	private List<Event> attendEvents;
+	
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
@@ -48,7 +67,7 @@ public class User {
 	public User() {
 		
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -103,6 +122,30 @@ public class User {
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+
+	public List<Event> getHostEvents() {
+		return hostEvents;
+	}
+
+	public void setHostEvents(List<Event> hostEvents) {
+		this.hostEvents = hostEvents;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<Event> getAttendEvents() {
+		return attendEvents;
+	}
+
+	public void setAttendEvents(List<Event> attendEvents) {
+		this.attendEvents = attendEvents;
 	}
 
 	public Date getCreatedAt() {
