@@ -15,6 +15,8 @@
 	<h1>Welcome, <c:out value="${user.email}" /></h1>
 	<a href="/logout">Logout</a>
 	<br /><br />
+	<a href="/sorthigh">Sort High to Low</a>
+	<a href="/sortlow">Sort Low to High</a>
 	<table>
 		<thead>
 			<tr>

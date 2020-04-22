@@ -15,6 +15,7 @@
 <body>
 	<a href="/dashboard">Dashboard</a>
 	<h1>Edit Task:</h1>
+	<p>${ error }</p>
 	<p><form:errors path="task.*"/></p>
 	<form:form action="/tasks/edit/${ task.id }" method="post" modelAttribute="task">
 	    <p>
@@ -24,6 +25,7 @@
    	    <p>
 	        <form:label path="assignee">Assignee</form:label>
 	        <form:select path="assignee">
+	        	<form:option value="">Unassigned</form:option>
         	<c:forEach items="${ users }" var="user">
 	        	<form:option value="${ user }">${ user.firstName } ${ user.lastName }</form:option>
 	        </c:forEach>

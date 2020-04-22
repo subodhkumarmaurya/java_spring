@@ -1,5 +1,7 @@
 package com.gregchance.taskmanager.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -46,10 +48,33 @@ public class MainController {
 		}
 		Long id = (Long) session.getAttribute("user_id");
 		model.addAttribute("user",urepo.findById(id).orElse(null));
-		model.addAttribute("tasks", trepo.findAll());
+		List<Task> sortedTasks = trepo.findAll();
+		sortedTasks.sort((t1,t2)->t1.getId().compareTo(t2.getId()));
+		model.addAttribute("tasks", sortedTasks);
 		return "dashboard.jsp";
 	}
 	
+//	Sort Dashboard Tasks
+	
+	@GetMapping("/sorthigh")
+	public String sortHigh(HttpSession session, Model model) {
+		Long id = (Long) session.getAttribute("user_id");
+		model.addAttribute("user",urepo.findById(id).orElse(null));
+		List<Task> sortedTasks = trepo.findAll();
+		sortedTasks.sort((t1,t2)->t1.getPriority()-t2.getPriority());
+		model.addAttribute("tasks", sortedTasks);
+		return "dashboard.jsp";
+	}
+	@GetMapping("/sortlow")
+	public String sortLow(HttpSession session, Model model) {
+		Long id = (Long) session.getAttribute("user_id");
+		model.addAttribute("user",urepo.findById(id).orElse(null));
+		List<Task> sortedTasks = trepo.findAll();
+		sortedTasks.sort((t1,t2)->t2.getPriority()-t1.getPriority());
+		model.addAttribute("tasks", sortedTasks);
+		return "dashboard.jsp";
+	}
+		
 //	New Task
 	
 	@GetMapping("/tasks/new")
@@ -64,9 +89,12 @@ public class MainController {
 			model.addAttribute("users", urepo.findAll());
 			return "newTask.jsp";
 		}
-		User user = urepo.findById((Long)session.getAttribute("user_id")).orElse(null);
-		if(user.getAssignedTasks().size() > 2) {
-			
+		if(task.getAssignee() != null) {
+			if(task.getAssignee().getAssignedTasks().size() > 2) {
+				model.addAttribute("users", urepo.findAll());
+				model.addAttribute("error", "User is already assigned to 3 tasks");
+				return "newTask.jsp";	
+			}
 		}
 		task.setCreator(urepo.findById((Long)session.getAttribute("user_id")).orElse(null));
 		trepo.save(task);
@@ -99,6 +127,14 @@ public class MainController {
 			task.setId(taskId);
 			model.addAttribute("users", urepo.findAll());
 			return "editTask.jsp";
+		}
+		if(task.getAssignee() != null) {
+			if(task.getAssignee().getAssignedTasks().size() > 2) {
+				task.setId(taskId);
+				model.addAttribute("users", urepo.findAll());
+				model.addAttribute("error", "User is already assigned to 3 tasks");
+				return "editTask.jsp";	
+			}
 		}
 		Task t = trepo.findById(taskId).orElse(null);
 		t.setName(task.getName());
