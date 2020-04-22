@@ -1,7 +1,5 @@
 package com.gregchance.productscategories.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -59,10 +57,10 @@ public class MainController {
 	public String addCat(@PathVariable("product_id") Long productID, @RequestParam("cat_id") Long catID) {
 		Product product = prepo.findById(productID).orElse(null);
 		Cat cat = crepo.findById(catID).orElse(null);
-//		product.getCategories().add(cat);
-		System.out.println(product.getCategories());
+		product.getCategories().add(cat);
+//		System.out.println(product.getCategories());
 //		product.setCategories(product.getCategories());
-//		prepo.save(product);
+		prepo.save(product);
 		return "redirect:/";
 	}
 	

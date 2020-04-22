@@ -18,9 +18,9 @@
 	    <input type="text" name="dojo" id="">
 	    <label for="language">Fav Lang</label>
 	    <select name="language" id="">
-	        <option value="python" name="language">Python</option>
-	        <option value="javascript" name="language">Javascript</option>
-	        <option value="java" name="language">Java</option>
+	        <option value="python">Python</option>
+	        <option value="javascript">Javascript</option>
+	        <option value="java">Java</option>
 	    </select>
 	    <label for="comment">Comment:</label>
 	    <textarea name="comment"></textarea>
