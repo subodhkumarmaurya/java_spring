@@ -1,7 +1,6 @@
 package com.wabdavinc.lonkedin.controllers;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 import com.wabdavinc.lonkedin.models.Game;
 import com.wabdavinc.lonkedin.models.Job;
@@ -93,40 +91,32 @@ public class MainController {
 		if(session.getAttribute("user_id") == null) {
 			return "redirect:/registration";
 		}
+		
 		Long id = (Long) session.getAttribute("user_id");
 		User user = urepo.findById(id).orElse(null);
+		
+//	Add model attributes
 		model.addAttribute("user",user);
+		model.addAttribute("post", new Post());
+		model.addAttribute("posts",prepo.findAll());
+		model.addAttribute("friendRequests", user.getFriendRequests());
+//	Get a list of 5 friends
 		ArrayList<User> friends = new ArrayList<User>();
 		if(user.getFriends().size() != 0) {
 			for(int i=0;i<user.getFriends().size();i++) {
 				friends.add(user.getFriends().get(i));
 			}	
 		}
+//	Get a list of 5 enemies
 		ArrayList<User> enemies = new ArrayList<User>();
 		if(user.getEnemies().size() != 0) {
 			for(int i=0;i<5;i++) {
 				enemies.add(user.getEnemies().get(i));
 			}	
 		}
-		String[] myArr;
-		for(User friend : user.getFriends()) {
-			friend.getPosts().size();
-		}
-//		user.getFriends().add(urepo.findByEmail("secondfall@gmail.com"));
-//		urepo.save(user);
-//		for(int i=0;i<user.getFriends().size();i++) {
-//			System.out.println(user.getFriends().size());
-//			System.out.println(user.getName());
-//		}
-		model.addAttribute("friends", user.getFriends());
-		System.out.println(user.getFriends());
+		model.addAttribute("friends", friends);
 		model.addAttribute("enemies", enemies);
-		model.addAttribute("posts",prepo.findAll());
-		model.addAttribute("post", new Post());
-		model.addAttribute("friendRequests", user.getFriendRequests());
-		// List <User> connections = urepo.findAll();
-		// model.addAttribute("user",urepo.findById(id).orElse(null));
-		// model.addAttribute("connections",connections);
+		
 		return "dashboard.jsp";
 	}
 	
@@ -143,15 +133,15 @@ public class MainController {
 	
 	@PostMapping("/search")
 	public String search(@RequestParam("search") String str, Model model, HttpSession session) {
-		List<User> searchResults = urepo.findByNameContaining(str);
-		for(int i=0;i<urepo.findByNameContaining(str).size();i++) {
-			System.out.println(urepo.findByNameContaining(str).get(i).getName());
-		}
-		System.out.println(searchResults);
-		model.addAttribute("searchResults", urepo.findByNameContaining(str));
+//		List<User> searchResults = urepo.findByNameContaining(str);
+//		for(int i=0;i<urepo.findByNameContaining(str).size();i++) {
+//			System.out.println(urepo.findByNameContaining(str).get(i).getName());
+//		}
+//		System.out.println(searchResults);
 		User u = urepo.findById((Long)session.getAttribute("user_id")).orElse(null);
 		model.addAttribute("user", u);
 		model.addAttribute("friends", u.getFriends());
+		model.addAttribute("searchResults", urepo.findByNameContaining(str));
 		return "searchResults.jsp";
 	}
 	
@@ -161,7 +151,9 @@ public class MainController {
 		User friend = urepo.findById(id).orElse(null);
 		u.getFriends().add(friend);
 		u.getFriendRequests().remove(friend);
+		friend.getFriends().add(u);
 		urepo.save(u);
+		urepo.save(friend);
 		return "redirect:/dashboard";
 	}
 	@PostMapping("/reject/{user_id}")
@@ -172,28 +164,32 @@ public class MainController {
 		urepo.save(u);
 		return "redirect:/dashboard";
 	}
+
 	
+//	**************************************************************
+	
+//	GREG
 //	============================================================== searchResults
 	
 	@GetMapping("/requestConnection/{userid}")
 	public String requestConnection(@PathVariable("userid") Long connectionID, HttpSession session) {
-		User connection = urepo.findById(connectionID).orElse(null);
 		User user = urepo.findById((Long)session.getAttribute("user_id")).orElse(null);
+		User connection = urepo.findById(connectionID).orElse(null);
 //		System.out.println(connection.getName());
 //		System.out.println(user.getName());
-		System.out.println(connection.getFriendRequests());
-		System.out.println(connection.getFriendRequests().size());
+//		System.out.println(connection.getFriendRequests());
+//		System.out.println(connection.getFriendRequests().size());
 		if(connection.getFriendRequests().contains(user)) {
 			return "redirect:/dashboard";
 		}
 		connection.getFriendRequests().add(user);
 		urepo.save(connection);
-		System.out.println(connection.getFriendRequests().size());
+//		System.out.println(connection.getFriendRequests().size());
 		return "redirect:/dashboard";
 	}
+
 	
 //	**************************************************************
-	
 	
 //	VERNON AND 
 //	============================================================== Connections
@@ -293,8 +289,6 @@ public class MainController {
 			srepo.save(skill);
 		}
 		return "redirect:/dashboard";
-		
-		
 	}
 	
 	@PostMapping("/skill/add")
@@ -311,10 +305,7 @@ public class MainController {
 			urepo.save(loggedIn);
 		}
 		return "redirect:/dashboard";
-		
-		
 	}
-	
 	
 	
 //	**************************************************************
@@ -364,7 +355,7 @@ public class MainController {
 	public String quitJob(Model model, HttpSession session, @PathVariable("job_id") Long jId){
 		Long userid=(Long) session.getAttribute("user_id");
 		User u =urepo.findById(userid).orElse(null);
-		Game g = grepo.findById(u.getGame().getId()).orElse(null);
+//		Game g = grepo.findById(u.getGame().getId()).orElse(null);
 		Job j =jrepo.findById(jId).orElse(null);
 		u.setJob(null);
 		u.setGame(null);
@@ -418,7 +409,7 @@ public class MainController {
 	
 	
 //	**************************************************************
-	
+		
 //	NO TOUCHY
 //	============================================================== Login and Registration
 
@@ -461,6 +452,7 @@ public class MainController {
 		}
 		return "redirect:/dashboard";
 	}
+	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
