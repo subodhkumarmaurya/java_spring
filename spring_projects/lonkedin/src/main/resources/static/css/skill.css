@@ -1,0 +1,52 @@
+
+h2 {
+	text-align: center;
+	margin: 0 0 20px 0;
+	text-decoration: underline;
+}
+.skillMain {
+	padding: 0 20px;
+}
+.skillForm {
+	padding: 2px;
+	margin: 5px;
+}
+	.skillForm input, .skillForm select {
+		width: 370px;
+		margin: 10px 0 0 0;
+		padding: 5px;
+		border-radius: 0%;
+		font-size: 15px;
+	}
+	.skillForm select {
+		width: 185px;
+	}
+	.skillForm select {
+		box-shadow: 1px 1px 2px black;
+	}
+	.skillForm .submit {
+		background-color: #00b138;
+		color: white;
+	}
+.header {
+	margin: 50px 0 20px 0;
+}
+.yourSkills {
+	border: 1px solid black;
+	padding: 10px 5px;
+	margin: 50px auto 0 auto;
+	width: 50%;
+}
+	.yourSkills p {
+		text-align: center;
+		padding: 2px;
+	}
+
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width:768px) {
+	.yourSkills {
+		width: auto;
+	}
+}

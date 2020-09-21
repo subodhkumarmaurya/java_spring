@@ -1,0 +1,336 @@
+
+/* DO NOT TOUCH THIS STYLESHEET. CREATE A NEW STYLESHEET SPECIFICALLY FOR YOUR JSP PAGE AND ADD A LINK TO IT IN THE HEAD */
+
+/* NORMALIZATION RESET */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+
+/* GLOBAL */
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+body:after {
+    content: "";
+    display: block;
+    position: fixed;
+    z-index: -2;   
+    width: 100%;
+    height: 100%;
+    background: url("/images/lonk.jpg");
+    background-color: rgb(174, 174, 174);
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: .25;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+button {
+	background-color: #00b138;
+	color: white;
+}
+
+
+/* WRAPPER */
+.wrapper {
+	width: 1200px;
+	margin: 0 auto 50px auto;
+}
+
+
+/* NAV */
+.navwrapper {
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	right: 0;
+	background-color: #284929;
+}
+.nav {
+	display: grid;
+	grid-template-columns: 1.5fr 1fr 1.5fr;
+	width: 1200px;
+	padding: 10px;
+	margin: auto;
+	color: white;
+}
+	.nav .llogo {
+		width: fit-content;
+		padding: 5px;
+		font-size: 20px;
+	}
+	.nav .llogo span {
+		font-weight: bolder;
+		margin: 0 0 0 2px;
+		padding: 0 2px;
+		background-color: white;
+		border-radius: 5%;
+		color: #284929;
+	}
+	
+/* NAV (LOGGED IN) */
+.navLI .nav1 {
+	display: grid;
+	grid-template-columns: min-content auto;
+	align-items: center;
+}
+.navLI .nav p {
+	display: inline-block;
+}
+.navLI form {
+	display: inline-block;
+}
+.navLI .search {
+	width: 55%;
+	padding: 5px;
+	margin: 0 0 0 10px;
+	border-radius: 0%;
+	
+}
+.navLI .searchSubmit {
+	padding: 4px 2px;
+	border-radius: 0%;
+	margin: 0 10px 0 0;
+}
+.nav2 {
+	align-self: center;
+	justify-self: center;	
+}
+.navLI .nav .icons {
+	align-self: center;
+	justify-self: center;
+}
+.navLI .icon-box {
+	width: 0;
+	height: 0;
+	color: #284a28;
+}
+.navLI .fafa {
+	width: 25px;
+	vertical-align: middle;
+	padding: 2px;
+	margin: 0 5px;
+	background-color: white;
+	border-radius: 50%;
+	border: 2px solid #00b238;
+}
+.nav3 {
+	align-self: center;
+	justify-self: right;
+}
+	.nav3 .links {
+		text-decoration: none;
+		color: white;
+	}
+	.nav3 .faq {
+		margin: 0 10px 0 0;
+	}
+
+/* NAV DROPDOWN */
+.lgHide {
+	display: none;
+}
+
+
+/* NAV SPACERS */
+.navSpacer {
+	height: 50px;
+}
+.navLISpacer {
+	height: 70px;
+}
+
+
+/* REGISTRATION AND LOGIN */
+.regLog {
+	display: grid;
+	justify-items: center;
+}
+	.regLog .welcome {
+		margin: 100px 0 0 0;
+	}
+	.regLog .blurb {
+		width: 80%;
+		margin: 40px 0 40px 0;
+		font-size: 18px;
+		text-align: center;
+		color: #666666;
+	}
+.error {
+	text-align: center;
+	color: red;
+}
+	.regLog .form {
+		display: grid;
+		justify-items: center;
+	}
+	.regLog .input {
+		width: 370px;
+		margin: 10px 0 0 0;
+		padding: 5px;
+		border: 2px inset #e9e8ea;
+		border-radius: 0%;
+		font-size: 15px;
+	}
+	.regLog .submit {
+		background-color: #00b138;
+		color: white;
+		border: 1px solid #b7b6b8;
+	}
+	.regLog .switch {
+		margin: 10px 0 0 0;
+	}
+
+
+/* LOGIN */
+.log .header {
+	margin: 100px 0 40px 0;
+}
+
+
+/* NEW CHARACTER */
+.newCharacter {
+	margin-bottom: 50px;
+}
+.newCharacter .ddlinks {
+	margin: 0 0 0 -70px;
+}
+.newChar .header {
+	margin: 100px 0 40px 0;
+}
+.newChar .picture {
+	margin: 40px 0 0 0;
+	width: 60%;
+	font-size: 18px;
+	font-weight: bolder;
+	text-align: center;
+}
+.newChar #images, .newChar .images {
+	width: 60%;
+	margin: 10px 0 40px 0;
+}
+	.newChar #images * {
+		margin: 2px;
+		padding: 2px;
+		border: 1px solid black;
+	}
+.newChar .flex, .newChar #flex {
+	display: flex;
+	justify-content: center;
+	flex-flow: wrap;
+}
+.newChar .randomImage {
+	padding: 2px;
+	border: 1px solid black;
+}
+.lonkImage {
+	width: 90px;
+	padding: 2px;
+	border: 1px solid black;
+}
+
+
+/* DASH */
+.dash {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 20px;
+	padding: 20px;
+}
+.dash .col1 {
+	display: grid;
+	row-gap: 20px;
+	align-self: flex-start;
+}
+.submit {
+	background-color: #00b138;
+	color: white;
+}
+.dash .col2 {
+	display: grid;
+	row-gap: 20px;
+	max-width: 100%;
+	align-self: flex-start;
+}
+
+
+/* JOBS */
+.jobForms {
+	display: grid;
+	grid-template-columns: 1fr;
+}
+.jobForms .companyForm, .jobForms .jobForm {
+	justify-self: center;
+	text-align: center;
+}
+
+
+/* SKILLS */
+.skillForm {
+	justify-self: center;
+	text-align: center;
+}
+
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width:1200px) {
+	.wrapper, .nav {
+		width: 100%
+	}
+	.logout {
+		padding: 0 22px 0 0;
+	}
+}
+
+@media only screen and (max-width:768px) {
+	.nav {
+		grid-template-columns: 1fr auto;
+	}
+		.nav .smHide {
+			display: none;
+		}
+	.dash, .jobForms {
+		grid-template-columns: 1fr;
+	}
+	.dash .col2 {
+		margin-top: 20px;
+	}
+
+/* NAV DROPDOWN */
+	.lgHide {
+		display: block;
+		justify-self: right;
+		align-self: center;
+		padding: 0 22px 0 0;
+	}
+	.nav .hamburger {
+		width: 20px;
+	}
+	  .nav .hamburger * {
+		height: 4px;
+		margin: 3px 0;
+		background-color: white;
+	}
+	.ddlinks {
+		display: none;
+		position: absolute;
+		margin: 0 0 0 -105px;
+		padding: 5px;
+		direction: rtl;
+		background-color:rgba(0, 0, 0, 0.502);
+		text-align: center;
+	}
+	.ddlink {
+		display: block;
+		margin: 2px 0 0 0;
+		padding: 4px 8px;
+		color: #284a28;
+		background-color: rgb(255, 255, 255);
+		font-weight: bold;
+	}
+}

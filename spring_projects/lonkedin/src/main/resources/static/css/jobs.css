@@ -1,0 +1,121 @@
+
+@charset "ISO-8859-1";
+
+body {
+	word-wrap: break-word;
+}
+h2{
+	background-color: #00b238;
+}
+button {
+	padding: 4px 5px;
+	background-color: #00b238;
+	color: white;
+}
+.jobContainer {
+	padding: 0 20px;
+}
+.jobForms{
+	padding:2px;
+	margin:5px;
+}
+.header {
+	margin: 50px 0 20px 0;
+}
+.companyForm input, .jobForm input, .companyForm select, .jobForm select {
+	width: 370px;
+	margin: 10px 0 0 0;
+	padding: 5px;
+	border-radius: 0%;
+	font-size: 15px;
+}
+.companyForm select, .jobForm select, .jobForm .number {
+	width: 185px;
+}
+.companyForm .submit, .jobForm .submit {
+	background-color: #00b138;
+	color: white;
+}
+.jobForm select {
+	box-shadow: 1px 1px 2px black;
+}
+.jobForm .cant {
+	margin: 10px 0 0 0;
+}
+.jobListings h1 {
+	margin: 10px 0 20px 0;
+	padding: 5px 0px;
+	background-color: #284a28;
+	color:white;
+	text-align: center;
+}
+.currentJob {
+	display: grid;
+	column-gap: 10px;
+	padding: 0 10px;
+	margin: 55px 0 0 0;
+}
+	.currentJob button {
+		color: white;
+		background-color: red;
+	}
+	.currentJob * {
+		display: inline-block;
+		max-width: 100%;
+		overflow-x: auto;
+		word-wrap: break-word;	
+	}
+.sortRow {
+	margin: 10px 5px 5px 0;
+	direction: rtl;	
+}
+.jobListGrid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	row-gap: 2px;
+	column-gap: 2px;
+	text-align: center;
+}
+	.jobListGrid .th {
+		font-weight: bold;
+	}
+	.jobListGrid p, .jobListGrid form {
+		padding: 2px;
+		border: 2px solid black;
+		max-width: 100%;
+		overflow-x: auto;
+		word-wrap: break-word;
+		background-color: rgba(255, 255, 255, 0.502);
+	}
+
+
+/* COMPANY.JSP */
+
+.back {
+	direction: rtl;
+}
+.gameHeader, .aboutGame {
+	margin: 0 0 20px 0;
+}
+	.gameHeader p, .aboutGame p {
+		padding: 0 0 0 5px;
+	}
+.employees h1 {
+	margin: 50px 0 20px 0;
+}
+.gameConnections {
+	padding: 0;
+}
+
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 786px) {
+	.jobListGrid {
+		grid-template-columns: repeat(3, 1fr);
+		row-gap: 2px;
+	}
+	.smCol {
+		margin: 0 0 20px 0;
+	}
+}

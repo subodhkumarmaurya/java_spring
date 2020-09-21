@@ -1,0 +1,53 @@
+
+.connectionsGrid {
+	padding: 0 20px;
+}
+.main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap:20px;
+    row-gap: 10px;
+}
+.row {
+	display: grid;
+	grid-template-columns: min-content auto auto;
+	align-items: center;
+	border: 1px solid black;
+	padding: 10px;
+}
+	.row img {
+		width: 35px;
+		margin: 0 5px 0 0;
+		border: 1px solid black;
+		border-radius: 50%;
+	}
+	.row .status {
+		justify-self: right;
+	}
+.resultInfo {
+	display:grid;
+}
+	.resultInfo * {
+		max-width: 100%;
+		overflow-x: auto;
+		word-wrap: break-word;
+	}
+
+
+/* CONNECTIONSV2.JSP */
+
+.searchResults h1 {
+	margin: 0 0 10px 15px;
+}
+.searchResults .enemyHeader {
+	margin-top: 50px;
+}
+
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 768px) {
+	.connectionsGrid {
+		grid-template-columns: 1fr;
+	}
+}
