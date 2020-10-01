@@ -15,7 +15,7 @@ public class StringsApplication {
 	
 	@RequestMapping("/")
 	public String hello() {
-		return "Hello Person, welcome to my WABSITE";
+		return "Hello Person, welcome to my WEBSITE";
 	}
 	@RequestMapping("/random")
 	public String random() {
